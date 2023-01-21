@@ -65,7 +65,7 @@ public class Product extends javax.swing.JFrame {
 
             },
             new String [] {
-                "No", "Code Barang", "Nama", "Bahan", "Harga Beli", "Keterangan Harga Beli", "Harga Jual", "Keterangan Harga Jual"
+                "No", "Kode Barang", "Jenis perawatan (skincare", "Bahan", "Harga Beli", "Harga beli bahan2 per kg", "Harga Jual", "Hrg Jual bahan2 per Volume pakai * 1 kg,"
             }
         ) {
             Class[] types = new Class [] {
@@ -197,10 +197,10 @@ public class Product extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jBtnSimpan)
+                                .addGap(87, 87, 87)
+                                .addComponent(JBDelete)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBtnRandom)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(JBDelete))
+                                .addComponent(jBtnRandom))
                             .addComponent(jTketerangan_harga_jual, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );

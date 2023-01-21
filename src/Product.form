@@ -66,8 +66,6 @@
                               <Component id="jBtnSimpan" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                               <Component id="JBDelete" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jBtnRandom" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jTketerangan_harga_jual" min="-2" pref="492" max="-2" attributes="0"/>
                       </Group>
@@ -113,7 +111,6 @@
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jBtnSimpan" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jBtnRandom" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="JTId" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="JBDelete" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -263,14 +260,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnSimpanActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="jBtnRandom">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Random"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnRandomActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="JTId">

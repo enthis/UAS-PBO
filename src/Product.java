@@ -47,7 +47,6 @@ public class Product extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jTketerangan_harga_jual = new javax.swing.JTextField();
         jBtnSimpan = new javax.swing.JToggleButton();
-        jBtnRandom = new javax.swing.JButton();
         JTId = new javax.swing.JTextField();
         JBDelete = new javax.swing.JButton();
 
@@ -139,13 +138,6 @@ public class Product extends javax.swing.JFrame {
             }
         });
 
-        jBtnRandom.setText("Random");
-        jBtnRandom.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnRandomActionPerformed(evt);
-            }
-        });
-
         JTId.setEditable(false);
         JTId.setText("-1");
         JTId.addActionListener(new java.awt.event.ActionListener() {
@@ -198,9 +190,7 @@ public class Product extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jBtnSimpan)
                                 .addGap(87, 87, 87)
-                                .addComponent(JBDelete)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBtnRandom))
+                                .addComponent(JBDelete))
                             .addComponent(jTketerangan_harga_jual, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
@@ -234,7 +224,6 @@ public class Product extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnSimpan)
-                    .addComponent(jBtnRandom)
                     .addComponent(JTId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JBDelete))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -294,14 +283,6 @@ public class Product extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_jBtnSimpanActionPerformed
-
-    private void jBtnRandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRandomActionPerformed
-        // TODO add your handling code here :
-        jTnama.setText(Double.toString(Math.random()));
-        jTbahan.setText(Double.toString(Math.random()));
-        jTketerangan_harga_beli.setText("Keterangan Beli "+Double.toString(Math.random()));
-        jTketerangan_harga_jual.setText("Keterangan Beli "+Double.toString(Math.random()));
-    }//GEN-LAST:event_jBtnRandomActionPerformed
     
     private void resetForm(){
         jBtnSimpan.setText("Simpan");
@@ -425,7 +406,6 @@ public class Product extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBDelete;
     private javax.swing.JTextField JTId;
-    private javax.swing.JButton jBtnRandom;
     private javax.swing.JToggleButton jBtnSimpan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

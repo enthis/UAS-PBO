@@ -1,7 +1,12 @@
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -91,28 +96,21 @@ public class Penjualan extends javax.swing.JFrame {
 
         jLabel1.setText("Cabang");
 
-        jCCabang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel2.setText("Cashier");
-
-        jCCashier.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jTblPenjualan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Nama", "Qty", "id_barang"
+                "Nama", "Qty", "id_barang", "Harga"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, false
+                false, true, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -129,7 +127,9 @@ public class Penjualan extends javax.swing.JFrame {
         if (jTblPenjualan.getColumnModel().getColumnCount() > 0) {
             jTblPenjualan.getColumnModel().getColumn(0).setResizable(false);
             jTblPenjualan.getColumnModel().getColumn(1).setResizable(false);
-            jTblPenjualan.getColumnModel().getColumn(2).setResizable(false);
+            jTblPenjualan.getColumnModel().getColumn(2).setMinWidth(0);
+            jTblPenjualan.getColumnModel().getColumn(2).setMaxWidth(0);
+            jTblPenjualan.getColumnModel().getColumn(3).setResizable(false);
         }
 
         jButton1.setText("Simpan Transaksi");
@@ -140,6 +140,11 @@ public class Penjualan extends javax.swing.JFrame {
         });
 
         jButton2.setText("Reset Transaksi");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -197,15 +202,76 @@ public class Penjualan extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
                 // TODO add your handling code here:
         this.addProductList();
+        this.addCabangDDL();
+        this.addCashierDDL();
     }//GEN-LAST:event_formWindowOpened
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        DatabaseConnection conn = new DatabaseConnection();
+        try {
+            
+            conn.conn.setAutoCommit(false);
+            Object iCabang = jCCabang.getSelectedItem();
+            String vCabang = iCabang.toString().split("-")[0];
+            Object iCashier = jCCashier.getSelectedItem();
+            String vCashier = iCashier.toString().split("-")[0];
+            String sqlPenjualan = "INSERT penjualan (id_cabang, id_karyawan) VALUES ( "+vCabang+", "+vCashier+");";
+            int idPenjualan = conn.cn.executeUpdate(sqlPenjualan,Statement.RETURN_GENERATED_KEYS);
+            DefaultTableModel tm = (DefaultTableModel)jTblPenjualan.getModel();
+            for (int i = 0; i < tm.getRowCount(); i++) {
+                String sqlPenjualanBarang = "INSERT INTO penjualan_barang (id_penjualan, id_barang, harga, qty) VALUES ( "+idPenjualan+", "+tm.getValueAt(i, 2)+", "+tm.getValueAt(i, 3)+","+tm.getValueAt(i, 1)+");";
+                conn.cn.execute(sqlPenjualanBarang);
+            }
+            conn.conn.commit();
+            JOptionPane.showMessageDialog(null, "Penjualan "+idPenjualan+" berhasil di simpan");
+            this.reset();
+        } catch(SQLException e){
+            try {
+                conn.conn.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(Penjualan.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            System.out.println(e.getMessage());
+        } 
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    private void reset(){
+        DefaultTableModel tm = (DefaultTableModel)jTblPenjualan.getModel();
+        tm.setRowCount(0);
+    }
+    int ip = 1;
     private void jTbBarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbBarangMouseClicked
         // TODO add your handling code here:
+        JTable source = (JTable)evt.getSource();
+        int row = source.rowAtPoint( evt.getPoint() );
+        String harga=source.getModel().getValueAt(row, 2)+"";
+        String id=source.getModel().getValueAt(row, 3)+"";
+        String nama=source.getModel().getValueAt(row, 1)+"";
+        DefaultTableModel tm = (DefaultTableModel)jTblPenjualan.getModel();
+        Boolean isUpdateRecord = false;
+        for (int i = 0; i < tm.getRowCount(); i++) {
+            if(tm.getValueAt(i, 2).equals(id)){
+                isUpdateRecord = true;
+                String qty = tm.getValueAt(i, 1)+"";
+                tm.setValueAt(Integer.parseInt(qty) + 1 , i, 1);
+            }
+        }
+        if(!isUpdateRecord){
+                Object o[] = {nama,1,id,harga};
+                tm.addRow(o);
+                ip = ip + 1;
+        }
+        
+        
     }//GEN-LAST:event_jTbBarangMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.reset();
+    }//GEN-LAST:event_jButton2ActionPerformed
     private void addProductList(){
         try {
             DatabaseConnection conn = new DatabaseConnection();
@@ -218,6 +284,35 @@ public class Penjualan extends javax.swing.JFrame {
             while(rs.next()){
                 Object o[] = {i,rs.getString("nama"),rs.getInt("harga_jual"),rs.getInt("id")};
                 tm.addRow(o);
+                i = i + 1;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            System.out.println(e.getMessage());
+        }
+    }                                    
+    private void addCabangDDL(){
+        try {
+            DatabaseConnection conn = new DatabaseConnection();
+            String sql = "SELECT * FROM cabang p;";
+            ResultSet rs = conn.cn.executeQuery(sql);
+            int i = 1;
+            while(rs.next()){
+                jCCabang.addItem(rs.getString("id") +"-"+rs.getString("nama"));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            System.out.println(e.getMessage());
+        }
+    }                                 
+    private void addCashierDDL(){
+        try {
+            DatabaseConnection conn = new DatabaseConnection();
+            String sql = "SELECT * FROM karyawan p;";
+            ResultSet rs = conn.cn.executeQuery(sql);
+            int i = 1;
+            while(rs.next()){
+                jCCashier.addItem(rs.getString("id") +"-"+rs.getString("nama"));
                 i = i + 1;
             }
         } catch (Exception e) {

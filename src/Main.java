@@ -25,21 +25,108 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jBtnCabang = new javax.swing.JButton();
+        jBtnBarang = new javax.swing.JButton();
+        jBtnCashier = new javax.swing.JButton();
+        jBtnTransaksi = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jBtnCabang.setText("Master Cabang");
+        jBtnCabang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCabangActionPerformed(evt);
+            }
+        });
+
+        jBtnBarang.setText("Master Barang");
+        jBtnBarang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnBarangActionPerformed(evt);
+            }
+        });
+
+        jBtnCashier.setText("Master Cashier");
+        jBtnCashier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCashierActionPerformed(evt);
+            }
+        });
+
+        jBtnTransaksi.setText("Transaksi");
+        jBtnTransaksi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnTransaksiActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Laporan Gaji Karyawan");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jBtnCabang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jBtnTransaksi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBtnCashier, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jBtnBarang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(54, 54, 54)
+                .addComponent(jButton1)
+                .addContainerGap(175, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnCabang)
+                    .addComponent(jButton1))
+                .addGap(27, 27, 27)
+                .addComponent(jBtnBarang)
+                .addGap(27, 27, 27)
+                .addComponent(jBtnCashier)
+                .addGap(27, 27, 27)
+                .addComponent(jBtnTransaksi)
+                .addContainerGap(100, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBtnCabangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCabangActionPerformed
+        // TODO add your handling code here:
+        new Cabang().setVisible(true);
+    }//GEN-LAST:event_jBtnCabangActionPerformed
+
+    private void jBtnBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBarangActionPerformed
+        // TODO add your handling code here:
+        new Product().setVisible(true);
+    }//GEN-LAST:event_jBtnBarangActionPerformed
+
+    private void jBtnCashierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCashierActionPerformed
+        // TODO add your handling code here:
+        new Karyawan().setVisible(true);
+    }//GEN-LAST:event_jBtnCashierActionPerformed
+
+    private void jBtnTransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnTransaksiActionPerformed
+        // TODO add your handling code here:
+        new Penjualan().setVisible(true);
+    }//GEN-LAST:event_jBtnTransaksiActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        new LaporanGajiKaryawan().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -71,15 +158,20 @@ public class Main extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Penjualan().setVisible(true);
+                //new Penjualan().setVisible(true);
                 //new Cabang().setVisiblesible(true);
                 //new Karyawan().setVisible(true);
                 //new Product().setVisible(true);
-                //new Main().setVisible(true);
+                new Main().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnBarang;
+    private javax.swing.JButton jBtnCabang;
+    private javax.swing.JButton jBtnCashier;
+    private javax.swing.JButton jBtnTransaksi;
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }
